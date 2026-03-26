@@ -2,6 +2,9 @@
 
 A **React + TypeScript** application that lets users build nested "If-Then" logic trees, link nodes to create complex graphs, and validates the integrity of those logic paths in real-time via cycle detection.
 
+🔗 **Live Demo:**  
+https://logic-flow-mapper-woad.vercel.app/
+
 ## Tech Stack
 
 - **React 19** + **TypeScript** (Vite)

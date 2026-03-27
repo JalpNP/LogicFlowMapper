@@ -7,6 +7,7 @@ import {
   Button,
   Paper,
   Divider,
+  Tooltip,
   CssBaseline,
   ThemeProvider,
   createTheme,
@@ -16,6 +17,8 @@ import {
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import UndoIcon from "@mui/icons-material/Undo";
+import RedoIcon from "@mui/icons-material/Redo";
 import { GraphProvider, useGraph } from "./state/GraphContext";
 import LogicNodeComponent from "./components/LogicNodeComponent";
 import SimulateButton from "./components/SimulateButton";
@@ -47,7 +50,7 @@ const theme = createTheme({
 });
 
 function AppContent() {
-  const { graph, dispatch, cycleResult } = useGraph();
+  const { graph, dispatch, cycleResult, undo, redo, canUndo, canRedo } = useGraph();
 
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
@@ -91,6 +94,36 @@ function AppContent() {
           >
             Reset All
           </Button>
+
+          <Divider orientation="vertical" flexItem />
+
+          <Tooltip title="Undo (Ctrl+Z)">
+            <span>
+              <Button
+                variant="outlined"
+                startIcon={<UndoIcon />}
+                onClick={undo}
+                disabled={!canUndo}
+                sx={{ textTransform: "none", minWidth: 0 }}
+              >
+                Undo
+              </Button>
+            </span>
+          </Tooltip>
+
+          <Tooltip title="Redo (Ctrl+Shift+Z)">
+            <span>
+              <Button
+                variant="outlined"
+                startIcon={<RedoIcon />}
+                onClick={redo}
+                disabled={!canRedo}
+                sx={{ textTransform: "none", minWidth: 0 }}
+              >
+                Redo
+              </Button>
+            </span>
+          </Tooltip>
 
           <Box sx={{ flexGrow: 1 }} />
 
